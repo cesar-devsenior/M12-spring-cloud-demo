@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: user-service-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users/**
+            - id: order-service-route
+              uri: lb://order-service
+              predicates:
+                - Path=/api/orders/**
