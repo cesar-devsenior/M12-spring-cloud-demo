@@ -7,10 +7,15 @@ spring:
         webmvc:
           routes:
             - id: user-service-route
-              uri: lb://user-service
+              uri: lb://USER-SERVICE
               predicates:
-                - Path=/api/users/**
+              - Path=/api/users/**
+              filters:
+              - TokenRelay=
             - id: order-service-route
-              uri: lb://order-service
+              uri: lb://ORDER-SERVICE
               predicates:
-                - Path=/api/orders/**
+              - Path=/api/orders/**
+              filters:
+              - TokenRelay=
+

@@ -1,0 +1,27 @@
+### Print variable to console via echo service
+POST https://postman-echo.com
+Content-Type: application/json
+
+{
+    "debug_variable": "{{login.response.body}}"
+}
+
+### Obtener el token JWT
+# @name login
+POST http://localhost:18081/realms/devsenior/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=microservices-client&client_secret=microservices-secret&username=testuser&password=password123&grant_type=password
+
+###
+GET http://localhost:18080/api/users
+Authorization: Bearer {{ login.response.body.access_token }}
+
+### 
+GET http://localhost:18080/api/users/1
+Authorization: Bearer {{ login.response.body.access_token }}
+
+### 
+GET http://localhost:18080/api/orders/ORD-001
+Authorization: Bearer {{ login.response.body.access_token }}
+
